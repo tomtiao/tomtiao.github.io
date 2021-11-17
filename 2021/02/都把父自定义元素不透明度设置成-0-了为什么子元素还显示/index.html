@@ -1,0 +1,254 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>都把父自定义元素不透明度设置成 0 了，为什么子元素还显示 | NoGoThere's Blog</title>
+<meta name=keywords content="透明度,子元素,父元素">
+<meta name=description content="一个迷惑但简单的问题">
+<meta name=author content>
+<link rel=canonical href=https://nogothere.com/2021/02/%E9%83%BD%E6%8A%8A%E7%88%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0%E4%B8%8D%E9%80%8F%E6%98%8E%E5%BA%A6%E8%AE%BE%E7%BD%AE%E6%88%90-0-%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%90%E5%85%83%E7%B4%A0%E8%BF%98%E6%98%BE%E7%A4%BA/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.6f60056d44d3f7eb69a4bc6c332b59960f3a995802bded244750232f33713c49.css integrity="sha256-b2AFbUTT9+tppLxsMytZlg86mVgCve0kR1AjLzNxPEk=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://nogothere.com/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://nogothere.com/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://nogothere.com/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://nogothere.com/apple-touch-icon.png>
+<link rel=mask-icon href=https://nogothere.com/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.89.3">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="都把父自定义元素不透明度设置成 0 了，为什么子元素还显示">
+<meta property="og:description" content="一个迷惑但简单的问题">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://nogothere.com/2021/02/%E9%83%BD%E6%8A%8A%E7%88%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0%E4%B8%8D%E9%80%8F%E6%98%8E%E5%BA%A6%E8%AE%BE%E7%BD%AE%E6%88%90-0-%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%90%E5%85%83%E7%B4%A0%E8%BF%98%E6%98%BE%E7%A4%BA/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-02-11T10:44:58+00:00">
+<meta property="article:modified_time" content="2021-02-11T10:44:58+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="都把父自定义元素不透明度设置成 0 了，为什么子元素还显示">
+<meta name=twitter:description content="一个迷惑但简单的问题">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://nogothere.com/posts/"},{"@type":"ListItem","position":3,"name":"都把父自定义元素不透明度设置成 0 了，为什么子元素还显示","item":"https://nogothere.com/2021/02/%E9%83%BD%E6%8A%8A%E7%88%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0%E4%B8%8D%E9%80%8F%E6%98%8E%E5%BA%A6%E8%AE%BE%E7%BD%AE%E6%88%90-0-%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%90%E5%85%83%E7%B4%A0%E8%BF%98%E6%98%BE%E7%A4%BA/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"都把父自定义元素不透明度设置成 0 了，为什么子元素还显示","name":"都把父自定义元素不透明度设置成 0 了，为什么子元素还显示","description":"一个迷惑但简单的问题","keywords":["透明度","子元素","父元素"],"articleBody":"背景 我尝试利用 Web Components 中的自定义元素创建文章列表元素和文章元素，这样可以将逻辑隐藏到元素的类中，从而降低心智负担。\n应用有搜索文章功能，在搜素无结果的情况下，我想通过设置文章列表元素的透明度，隐藏文章列表。\n问题 然而，这个元素在 Firefox 中与其他基于 Webkit 的浏览器表现不一致。\n在 Firefox 里，改变这个元素的透明度会影响到其子元素，而在其他浏览器上不会，这里有个例子，可以用 Firefox 和 Chrome 对照着看。\n例子中简单对比了和这两种情况。可以看到，在 Chrome 中，隐藏外层元素后，前者的子元素也同时隐藏了，而后者的子元素没有；而在 Firefox 中，两者的子元素都隐藏了。到底是什么问题呢？\n寻找原因 我一开始以为是 Chrome 对自定义元素的支持不佳，于是去 Can I Use 查找兼容性表格1，发现早在 Chrome v672 时，Chrome 就已经完整支持自定义元素了，所以这并不是 Chrome 中的自定义元素有问题。\n排除了上述可能，剩下就只有样式了。因为元素在 Firefox 中的表现更符合我的期望，所以我认为这可能是 Chromium 的问题，于是我在 Chromium 的问题追踪平台中搜索是否已经有人发现这一现象。\n因为不确定具体是哪方面出了问题，我只能直接以opacity作为关键词搜索，一条条排除。还好，搜索结果一共就 200 多条，找起来不是很费劲。\n很快，我就看到两个贴子，似乎提到了遇到的问题：\n  Issue 764011: Block elements in inline elements with opacity:0 are displaying\n  Issue 836244: Text inside the block part of an IB split isn’t affected by parent opacity.\n  注意到这两个帖子都提到了内联元素：\n … in inline elements…\n 以及\n Text inside…\n 分析  难道这个问题与内联元素有关？但我没有用到内联元素啊。\n 我真的没有用到内联元素吗？再看前面的例子。\nhead中没有可疑部分，style中只有一个 class：\nmeta charset=\"UTF-8\" meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" titleDocumenttitle style.hidden { opacity: 0; transition: opacity 0.3s ease-in; }style body元素内的前几行：\ndiv id=\"a\" span style=\"padding: 0.5rem; background-color: lightgrey;\"foospan div 显然都是块级元素，没问题。\nscript标签中的代码呢？\nclass HostElement extends HTMLElement { constructor() { super(); this.attachShadow( { mode: 'open' } ); } } customElements.define('host-element', HostElement); 自定义元素的类声明，以及标准要求的定义元素操作，看起来没啥问题。\nconst div = document.createElement('div'); div.style = 'padding: 0.5rem; background-color: lightgrey;'; div.textContent = 'bar'; const host = new HostElement(); host.shadowRoot.append(div); 创建div元素，设置其样式和内容；创建自定义元素的实例；把div加到自定义元素中的影子DOM中。看不出问题。\nconst btn = document.createElement('button'); btn.textContent = 'Toggle hidden'; btn.addEventListener('click', e = { host.classList.toggle('hidden'); document.getElementById('a').classList.toggle('hidden'); }); document.body.append(host, btn); 创建button元素，设置其内容，绑定点击事件，在点击时切换自定义元素和前面HTML中div的 class，最后把自定义元素和按钮都添加到body中。还是看不出问题。\n这个内联元素究竟在哪儿？\n 打开 Chrome 浏览器开发人员工具，检查自定义元素，查看其样式计算值：\n自定义元素的display的值居然是inline，我之前理所当然地认为其display的值是block！\n标准是否规定了自定义元素display属性的默认值？打开HTML标准，找到自定义元素部分，这是标准对自定义元素的定义3：\n标准表明自定义元素属于 Phrasing Content，或短语元素。\n实际上，HTML5 标准没有定义块级元素和内联元素，很多原本叫内联元素的元素，都属于短语元素一类。通过查阅 MDN4可以发现，短语元素包含了许多熟知的内联元素：\n我在标准中，确实没找到自定义元素或短语元素display的具体取值，似乎是标准5选择留给浏览器用户代理实现，但在 Google Developers 上有篇说明 Web Components 的文章6，其中提到了自定义元素的display默认值为inline：\n Set a :host display style (e.g. block,inline-block, flex) unless you prefer the default of inline.\n  Why?\n Custom elements are display: inline by default…     我就把这篇文章当作事实标准吧。\n为什么Chromium会出问题 明白了这个内联元素在哪儿，回过头看看前面提到的两个 issue。\n  Issue 764011: Block elements in inline elements with opacity:0 are displaying\n  Issue 836244: Text inside the block part of an IB split isn’t affected by parent opacity.\n  两者均是内联元素7中存在块级元素后发生的问题，违反了内联元素中不能出现块级元素这一规则。\n虽然说在内联元素中出现块级元素违反了规则，但也不至于子元素直接无视父元素的透明度。点开两个 issue，其中第二个帖子中提到了相关的 CSS 规范8，规范说：\n Opacity can be thought of as a postprocessing operation. Conceptually, after the element (including its descendants) is rendered into an RGBA offscreen image, the opacity setting specifies how to blend the offscreen rendering into the current composite rendering.\n 提到了按元素，且包括其子元素，应用透明度，没有提到内联或块级。\n由此可以推知，Chromium 的行为不正确。第二个帖子中还有回复提到，Chromium 没有正确构造Layout Tree9，导致本应在内联元素内部的块级元素，出现在内联元素之外，于是透明度没有作用到块级元素上。\n解决问题 明白了在这种情况下 Chromium 的渲染有问题，那么避开就好了：将父元素的display设置成非inline即可。符合规范的例子。\n毕竟，内联元素中本就不该出现块级元素。\n  Custom Elements (V1) ↩︎\n 于 2018 年 4 月发布。 ↩︎\n 4.13.3 Core concepts ↩︎\n 短语元素（Phrasing content） ↩︎\n 15 Rendering ↩︎\n Custom Element Best Practices ↩︎\n 为了避免引入过多新概念，后文仍然使用“内联元素”。要了解 HTML5 标准的内容分类，参见 MDN ↩︎\n 11. Transparency: the opacity property ↩︎\n I’ve attached the box trees for Firefox and Chromium for the following example: data:text/html,inline textblock text ↩︎\n   ","wordCount":"2023","inLanguage":"en","datePublished":"2021-02-11T10:44:58Z","dateModified":"2021-02-11T10:44:58Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://nogothere.com/2021/02/%E9%83%BD%E6%8A%8A%E7%88%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0%E4%B8%8D%E9%80%8F%E6%98%8E%E5%BA%A6%E8%AE%BE%E7%BD%AE%E6%88%90-0-%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%90%E5%85%83%E7%B4%A0%E8%BF%98%E6%98%BE%E7%A4%BA/"},"publisher":{"@type":"Organization","name":"NoGoThere's Blog","logo":{"@type":"ImageObject","url":"https://nogothere.com/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://nogothere.com accesskey=h title="NoGoThere's Blog (Alt + H)">NoGoThere's Blog</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://nogothere.com/ title=首页>
+<span>首页</span>
+</a>
+</li>
+<li>
+<a href=https://nogothere.com/posts/ title=文章>
+<span>文章</span>
+</a>
+</li>
+<li>
+<a href=https://nogothere.com/categories/ title=分类>
+<span>分类</span>
+</a>
+</li>
+<li>
+<a href=https://nogothere.com/tags/ title=标签>
+<span>标签</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://nogothere.com>Home</a>&nbsp;»&nbsp;<a href=https://nogothere.com/posts/>Posts</a></div>
+<h1 class=post-title>
+都把父自定义元素不透明度设置成 0 了，为什么子元素还显示
+</h1>
+<div class=post-description>
+一个迷惑但简单的问题
+</div>
+<div class=post-meta><span title="2021-02-11 10:44:58 +0000 UTC">February 11, 2021</span>&nbsp;·&nbsp;5 min
+</div>
+</header>
+<div class=post-content><h2 id=背景>背景<a hidden class=anchor aria-hidden=true href=#背景>#</a></h2>
+<p>我尝试利用 Web Components 中的自定义元素创建文章列表元素和文章元素，这样可以将逻辑隐藏到元素的类中，从而降低心智负担。</p>
+<p>应用有搜索文章功能，在搜素无结果的情况下，我想通过设置文章列表元素的透明度，隐藏文章列表。</p>
+<h2 id=问题>问题<a hidden class=anchor aria-hidden=true href=#问题>#</a></h2>
+<p>然而，这个元素在 Firefox 中与其他基于 Webkit 的浏览器表现不一致。</p>
+<p>在 Firefox 里，改变这个元素的透明度会影响到其子元素，而在其他浏览器上不会，<a href=/misc/different-behaviour-across-browsers.html title=不同浏览器表现不一>这里有个例子</a>，可以用 Firefox 和 Chrome 对照着看。</p>
+<p>例子中简单对比了<code>&lt;div>&lt;div>&lt;/div>&lt;/div></code>和<code>&lt;host-element>&lt;div>&lt;/div>&lt;/host-element></code>这两种情况。可以看到，在 Chrome 中，隐藏外层元素后，前者的子元素也同时隐藏了，而后者的子元素没有；而在 Firefox 中，两者的子元素都隐藏了。到底是什么问题呢？</p>
+<h2 id=寻找原因>寻找原因<a hidden class=anchor aria-hidden=true href=#寻找原因>#</a></h2>
+<p>我一开始以为是 Chrome 对自定义元素的支持不佳，于是去 Can I Use 查找兼容性表格<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，发现早在 Chrome v67<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> 时，Chrome 就已经完整支持自定义元素了，所以这并不是 Chrome 中的自定义元素有问题。</p>
+<p>排除了上述可能，剩下就只有样式了。因为元素在 Firefox 中的表现更符合我的期望，所以我认为这可能是 Chromium 的问题，于是我在 Chromium 的<a href=https://bugs.chromium.org>问题追踪平台</a>中搜索是否已经有人发现这一现象。</p>
+<p>因为不确定具体是哪方面出了问题，我只能直接以<code>opacity</code>作为关键词搜索，一条条排除。还好，搜索结果一共就 200 多条，找起来不是很费劲。</p>
+<p>很快，我就看到两个贴子，似乎提到了遇到的问题：</p>
+<ul>
+<li>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=764011">Issue 764011: Block elements in inline elements with opacity:0 are displaying</a></p>
+</li>
+<li>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=836244">Issue 836244: Text inside the block part of an IB split isn&rsquo;t affected by parent opacity.</a></p>
+</li>
+</ul>
+<p>注意到这两个帖子都提到了内联元素：</p>
+<blockquote>
+<p>&mldr; in <strong>inline</strong> elements&mldr;</p>
+</blockquote>
+<p>以及</p>
+<blockquote>
+<p><strong>Text</strong> inside&mldr;</p>
+</blockquote>
+<h3 id=分析>分析<a hidden class=anchor aria-hidden=true href=#分析>#</a></h3>
+<blockquote>
+<p>难道这个问题与内联元素有关？但我没有用到内联元素啊。</p>
+</blockquote>
+<p>我真的没有用到内联元素吗？再看<a href=/misc/different-behaviour-across-browsers.html>前面的例子</a>。</p>
+<p><code>head</code>中没有可疑部分，<code>style</code>中只有一个 class：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+&lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+&lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+&lt;<span style=color:#f92672>style</span>&gt;.<span style=color:#a6e22e>hidden</span> { <span style=color:#66d9ef>opacity</span>: <span style=color:#ae81ff>0</span>; <span style=color:#66d9ef>transition</span>: <span style=color:#66d9ef>opacity</span> <span style=color:#ae81ff>0.3</span><span style=color:#66d9ef>s</span> <span style=color:#66d9ef>ease-in</span>; }&lt;/<span style=color:#f92672>style</span>&gt;
+</code></pre></div><p><code>body</code>元素内的前几行：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;a&#34;</span>&gt;
+  &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>style</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;padding: 0.5rem; background-color: lightgrey;&#34;</span>&gt;foo&lt;/<span style=color:#f92672>span</span>&gt;
+&lt;/<span style=color:#f92672>div</span>&gt;
+</code></pre></div><p>显然都是块级元素，没问题。</p>
+<p><code>script</code>标签中的代码呢？</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HostElement</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>HTMLElement</span> {
+  <span style=color:#a6e22e>constructor</span>() {
+    <span style=color:#66d9ef>super</span>();
+    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>attachShadow</span>( { <span style=color:#a6e22e>mode</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;open&#39;</span> } );
+  }
+}
+<span style=color:#a6e22e>customElements</span>.<span style=color:#a6e22e>define</span>(<span style=color:#e6db74>&#39;host-element&#39;</span>, <span style=color:#a6e22e>HostElement</span>);
+</code></pre></div><p>自定义元素的类声明，以及标准要求的定义元素操作，看起来没啥问题。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>div</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>createElement</span>(<span style=color:#e6db74>&#39;div&#39;</span>);
+<span style=color:#a6e22e>div</span>.<span style=color:#a6e22e>style</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;padding: 0.5rem; background-color: lightgrey;&#39;</span>;
+<span style=color:#a6e22e>div</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;bar&#39;</span>;
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>host</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>HostElement</span>();
+<span style=color:#a6e22e>host</span>.<span style=color:#a6e22e>shadowRoot</span>.<span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>div</span>);
+</code></pre></div><p>创建<code>div</code>元素，设置其样式和内容；创建自定义元素的实例；把<code>div</code>加到自定义元素中的影子DOM中。看不出问题。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>btn</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>createElement</span>(<span style=color:#e6db74>&#39;button&#39;</span>);
+<span style=color:#a6e22e>btn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Toggle hidden&#39;</span>;
+<span style=color:#a6e22e>btn</span>.<span style=color:#a6e22e>addEventListener</span>(<span style=color:#e6db74>&#39;click&#39;</span>, <span style=color:#a6e22e>e</span> =&gt; {
+    <span style=color:#a6e22e>host</span>.<span style=color:#a6e22e>classList</span>.<span style=color:#a6e22e>toggle</span>(<span style=color:#e6db74>&#39;hidden&#39;</span>);
+    document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>classList</span>.<span style=color:#a6e22e>toggle</span>(<span style=color:#e6db74>&#39;hidden&#39;</span>);
+});
+
+document.<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>host</span>, <span style=color:#a6e22e>btn</span>);
+</code></pre></div><p>创建<code>button</code>元素，设置其内容，绑定点击事件，在点击时切换自定义元素和前面HTML中<code>div</code>的 class，最后把自定义元素和按钮都添加到<code>body</code>中。还是看不出问题。</p>
+<p>这个内联元素究竟在哪儿？</p>
+<hr>
+<p>打开 Chrome 浏览器开发人员工具，检查自定义元素，查看其样式计算值：</p>
+<p><img loading=lazy src=/image/custom-elements-computed-style.png alt=自定义元素的样式计算值>
+</p>
+<p>自定义元素的<code>display</code>的值居然是<code>inline</code>，我之前理所当然地认为其<code>display</code>的值是<code>block</code>！</p>
+<p>标准是否规定了自定义元素<code>display</code>属性的默认值？打开HTML标准，找到自定义元素部分，这是标准对自定义元素的定义<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>：</p>
+<p><img loading=lazy src=/image/spec-definition-of-custom-elements.png alt=自定义元素的定义>
+</p>
+<p>标准表明自定义元素属于 Phrasing Content，或短语元素。</p>
+<p>实际上，HTML5 标准没有定义块级元素和内联元素，很多原本叫内联元素的元素，都属于短语元素一类。通过查阅 MDN<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>可以发现，短语元素包含了许多熟知的内联元素：</p>
+<p><img loading=lazy src=/image/phrasing-content-on-mdn.png alt=属于短语元素的元素>
+</p>
+<p>我在标准中，确实没找到自定义元素或短语元素<code>display</code>的具体取值，似乎是标准<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>选择留给浏览器用户代理实现，但在 Google Developers 上有篇说明 Web Components 的文章<sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>，其中提到了自定义元素的<code>display</code>默认值为<code>inline</code>：</p>
+<blockquote>
+<p>Set a <code>:host</code> display style (e.g. <code>block</code>,<code>inline-block</code>, <code>flex</code>) unless you prefer the default of <code>inline</code>.</p>
+<ul>
+<li>
+<p>Why?</p>
+<ul>
+<li>Custom elements are <code>display: inline</code> by default&mldr;</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>我就把这篇文章当作事实标准吧。</p>
+<h3 id=为什么chromium会出问题>为什么Chromium会出问题<a hidden class=anchor aria-hidden=true href=#为什么chromium会出问题>#</a></h3>
+<p>明白了这个内联元素在哪儿，回过头看看前面提到的两个 issue。</p>
+<ul>
+<li>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=764011">Issue 764011: Block elements in inline elements with opacity:0 are displaying</a></p>
+</li>
+<li>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=836244">Issue 836244: Text inside the block part of an IB split isn&rsquo;t affected by parent opacity.</a></p>
+</li>
+</ul>
+<p>两者均是内联元素<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup>中存在块级元素后发生的问题，违反了内联元素中不能出现块级元素这一规则。</p>
+<p>虽然说在内联元素中出现块级元素违反了规则，但也不至于子元素直接无视父元素的透明度。点开两个 issue，其中第二个帖子中提到了相关的 CSS 规范<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>，规范说：</p>
+<blockquote>
+<p>Opacity can be thought of as a postprocessing operation. Conceptually, after the element (including its descendants) is rendered into an RGBA offscreen image, the opacity setting specifies how to blend the offscreen rendering into the current composite rendering.</p>
+</blockquote>
+<p>提到了按元素，且包括其子元素，应用透明度，没有提到内联或块级。</p>
+<p>由此可以推知，Chromium 的行为不正确。第二个帖子中还有回复提到，Chromium 没有正确构造<a href=https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work#layout>Layout Tree</a><sup id=fnref:9><a href=#fn:9 class=footnote-ref role=doc-noteref>9</a></sup>，导致本应在内联元素内部的块级元素，出现在内联元素之外，于是透明度没有作用到块级元素上。</p>
+<h2 id=解决问题>解决问题<a hidden class=anchor aria-hidden=true href=#解决问题>#</a></h2>
+<p>明白了在这种情况下 Chromium 的渲染有问题，那么避开就好了：将父元素的<code>display</code>设置成非<code>inline</code>即可。<a href=/misc/different-behaviour-across-browsers-a-more-spec-compliant-example.html>符合规范的例子</a>。</p>
+<p>毕竟，内联元素中本就不该出现块级元素。</p>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p><a href=https://caniuse.com/custom-elementsv1>Custom Elements (V1)</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:2 role=doc-endnote>
+<p>于 2018 年 4 月发布。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:3 role=doc-endnote>
+<p><a href=https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-core-concepts title=自定义元素的定义>4.13.3 Core concepts</a>&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:4 role=doc-endnote>
+<p><a href=https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories#%E7%9F%AD%E8%AF%AD%E5%85%83%E7%B4%A0%EF%BC%88phrasing_content%EF%BC%89 title=属于短语元素的元素>短语元素（Phrasing content）</a>&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:5 role=doc-endnote>
+<p><a href=https://html.spec.whatwg.org/multipage/rendering.html#rendering title=标准中有关渲染的部分>15 Rendering</a>&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:6 role=doc-endnote>
+<p><a href=https://developers.google.com/web/fundamentals/web-components/best-practices#shadow-dom>Custom Element Best Practices</a>&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:7 role=doc-endnote>
+<p>为了避免引入过多新概念，后文仍然使用“内联元素”。要了解 HTML5 标准的内容分类，参见 <a href=https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories>MDN</a>&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:8 role=doc-endnote>
+<p><a href=https://drafts.csswg.org/css-color/#transparency>11. Transparency: the opacity property</a>&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:9 role=doc-endnote>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=836244#c16">I&rsquo;ve attached the box trees for Firefox and Chromium for the following example: <code>data:text/html,&lt;span id=target style="opacity:0.2">inline text&lt;div>block text&lt;/div>&lt;/span></code></a>&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://nogothere.com/tags/web-components/>Web Components</a></li>
+<li><a href=https://nogothere.com/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0/>自定义元素</a></li>
+<li><a href=https://nogothere.com/tags/%E8%B7%A8%E6%B5%8F%E8%A7%88%E5%99%A8/>跨浏览器</a></li>
+</ul>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2021 <a href=https://nogothere.com>NoGoThere's Blog</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
